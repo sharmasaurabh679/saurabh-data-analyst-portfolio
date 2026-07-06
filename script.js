@@ -189,3 +189,40 @@ if(messageForm)messageForm.addEventListener('submit',e=>{
  animate({targets:'.message-form button',scale:[1,.97,1],duration:500,easing:'easeOutQuad'});
  window.location.href=`mailto:saurabhsharma.yash2004@gmail.com?subject=${subject}&body=${body}`;
 });
+
+
+// V7.4 mobile / tablet navigation
+const menuToggle = document.querySelector('#menuToggle');
+const mainNav = document.querySelector('#mainNav');
+
+function closeMobileNav(){
+  if(!menuToggle || !mainNav) return;
+  menuToggle.classList.remove('active');
+  mainNav.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded','false');
+  menuToggle.setAttribute('aria-label','Open navigation menu');
+  document.body.classList.remove('menu-open');
+}
+
+if(menuToggle && mainNav){
+  menuToggle.addEventListener('click',()=>{
+    const opening = !mainNav.classList.contains('open');
+    mainNav.classList.toggle('open',opening);
+    menuToggle.classList.toggle('active',opening);
+    menuToggle.setAttribute('aria-expanded',String(opening));
+    menuToggle.setAttribute('aria-label',opening ? 'Close navigation menu' : 'Open navigation menu');
+    document.body.classList.toggle('menu-open',opening);
+  });
+
+  mainNav.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click',closeMobileNav);
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(e.key === 'Escape') closeMobileNav();
+  });
+
+  window.addEventListener('resize',()=>{
+    if(window.innerWidth > 900) closeMobileNav();
+  });
+}

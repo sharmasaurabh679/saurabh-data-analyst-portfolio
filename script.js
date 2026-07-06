@@ -80,7 +80,7 @@ const sections=qa('main section'), navs=qa('nav a');
 function onScroll(){
  const max=document.documentElement.scrollHeight-innerHeight, pct=max?scrollY/max:0;
  q('.progress-rail i').style.height=pct*100+'%';
- const stage=q('.data-stage'); if(stage&&motionOn)stage.style.transform=`translateY(${scrollY*.035}px)`;
+ const stage=q('.data-stage'); if(stage&&motionOn&&innerWidth>900)stage.style.transform=`translateY(${scrollY*.035}px)`; else if(stage&&innerWidth<=900)stage.style.transform='none';
  let current=sections[0];
  sections.forEach(s=>{if(scrollY>=s.offsetTop-innerHeight*.42)current=s});
  const id=current.id, idx=sections.indexOf(current);

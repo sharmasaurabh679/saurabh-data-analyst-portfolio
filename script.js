@@ -18,39 +18,26 @@ document.addEventListener('mouseout',e=>{
 
 
 // =========================================================
-// DARK THEME DEFAULT
+// DARK THEME — ALWAYS DEFAULT ON WEBSITE OPEN
 // =========================================================
 
-const savedTheme = localStorage.getItem('portfolio-theme');
-
-// Dark theme is default for first-time visitors.
-// Returning visitors keep their selected theme.
-if(savedTheme === null || savedTheme === 'dark'){
- document.body.classList.add('dark');
-}else{
- document.body.classList.remove('dark');
-}
+// Every page load starts in dark theme
+document.body.classList.add('dark');
 
 const themeButton = q('#theme');
 
-if(themeButton){
- themeButton.onclick=()=>{
-  document.body.classList.toggle('dark');
+if (themeButton) {
+  themeButton.onclick = () => {
+    document.body.classList.toggle('dark');
 
-  localStorage.setItem(
-   'portfolio-theme',
-   document.body.classList.contains('dark')?'dark':'light'
-  );
-
-  animate({
-   targets:'body',
-   opacity:[.82,1],
-   duration:350,
-   easing:'easeOutQuad'
-  });
- };
+    animate({
+      targets: 'body',
+      opacity: [.82, 1],
+      duration: 350,
+      easing: 'easeOutQuad'
+    });
+  };
 }
-
 
 // =========================================================
 // HERO ANIMATION

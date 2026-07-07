@@ -14,12 +14,30 @@ document.addEventListener('mouseout',e=>{
  if(e.target.closest('a,button,article')) animate({targets:'#cursor',scale:1,duration:220});
 });
 
-const savedTheme=localStorage.getItem('portfolio-theme');
-if(savedTheme==='dark')document.body.classList.add('dark');
-q('#theme').onclick=()=>{
- document.body.classList.toggle('dark');
- localStorage.setItem('portfolio-theme',document.body.classList.contains('dark')?'dark':'light');
- animate({targets:'body',opacity:[.82,1],duration:350,easing:'easeOutQuad'});
+const savedTheme = localStorage.getItem('portfolio-theme');
+
+// Dark theme is default for new visitors
+if (savedTheme === null || savedTheme === 'dark') {
+  document.body.classList.add('dark');
+} else {
+  document.body.classList.remove('dark');
+}
+
+q('#theme').onclick = () => {
+  document.body.classList.toggle('dark');
+
+  localStorage.setItem(
+    'portfolio-theme',
+    document.body.classList.contains('dark') ? 'dark' : 'light'
+  );
+
+  animate({
+    targets: 'body',
+    opacity: [.82, 1],
+    duration: 350,
+    easing: 'easeOutQuad'
+  });
+};
 };
 
 
